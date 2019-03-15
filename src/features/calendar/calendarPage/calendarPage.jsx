@@ -1,20 +1,20 @@
-import CalendarCom from "./calendar";
+import CalendarCom from "../calendar";
+import { connect } from "react-redux";
 import React, { Component } from "react";
-import moment from "moment";
 import { Grid, Button, Container } from "semantic-ui-react";
-import NavBar from "./NavBar";
+import NavBar from "../../../app/NavBar";
+import { Link } from "react-router-dom";
+const mapState = state => ({
+  calendars: state.calendars
+});
 
 class CalendarPage extends Component {
-  state = {
-    events: [
-      {
-        start: new Date(),
-        end: new Date(moment().add(1, "days")),
-        title: "Some title"
-      }
-    ]
+  handleEventCreated = newEvent => {
+    const updatedEvents = [...this.state.events, newEvent];
+    this.setState({
+      events: updatedEvents
+    });
   };
-
   onEventResize = (type, { event, start, end, allDay }) => {
     this.setState(state => {
       state.events[0].start = start;
@@ -28,18 +28,19 @@ class CalendarPage extends Component {
   };
 
   render() {
+    const { calendars } = this.props;
     return (
       <div>
         <NavBar />
         <Container className="main">
           <Grid>
             <Grid.Column width={3}>
-              <Button positive content="Create Event" />
+              <Button as={Link} to='/createEvent' positive content="Create Event" />
               <h1>Agenda</h1>
             </Grid.Column>
             <Grid.Column width={13}>
               <CalendarCom
-                events={this.state.events}
+                events={calendars}
                 onEventDrop={this.onEventDrop}
                 onEventResize={this.onEventResize}
               />
@@ -51,4 +52,4 @@ class CalendarPage extends Component {
   }
 }
 
-export default CalendarPage;
+export default connect(mapState)(CalendarPage);

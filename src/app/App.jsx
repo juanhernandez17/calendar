@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import NavBar from "./NavBar";
 import { Container } from "semantic-ui-react";
 import { Route, Switch } from "react-router-dom";
-import CalendarPage from "./calendarPage";
-import home from "./home";
+import CalendarPage from "../features/calendar/calendarPage/calendarPage";
+import home from "../features/home/home";
+import createEvent from "../features/calendar/createEvent/createEvent";
 class App extends Component {
   render() {
     return (
@@ -21,6 +22,7 @@ class App extends Component {
               <Container className="main">
                 <Switch>
                   <Route path="/calendar" component={CalendarPage} />
+                  <Route path="/createEvent" component={createEvent} />
                 </Switch>
               </Container>
             </div>

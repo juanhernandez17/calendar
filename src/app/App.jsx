@@ -9,11 +9,9 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-        <Container>
-          <Switch>
-            <Route exact path="/" componennt={home} />
-          </Switch>
-        </Container>
+        <Switch>
+          <Route exact path="/" component={home} />
+        </Switch>
         <Route
           path="/(.+)"
           render={() => (

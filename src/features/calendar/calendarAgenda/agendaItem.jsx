@@ -1,21 +1,30 @@
 import React, { Component } from "react";
-import { Item, Button } from "semantic-ui-react";
+import { Card, Item, Button, Icon } from "semantic-ui-react";
+import EventInfo from "../eventInfo";
 
 class AgendaItem extends Component {
   render() {
+    const { event, deleteEvent} = this.props;
     return (
-      <Item.Group>
+      <Card>
         <Item>
           <Item.Content>
-            <Item.Header>Title</Item.Header>
+            <Item.Header>{event.title}</Item.Header>
             <Item.Meta>
-              <span className="price">Date</span>
-              <span className="stay">Time</span>
+              <Icon className="date">{new Intl.DateTimeFormat( {
+                    year: "numeric",
+                    month: "long",
+                      day: "2-digit",
+                      hour: "2-digit",
+                    minute: "2-digit"
+                  }).format(event.start)}</Icon>
             </Item.Meta>
-            <Button floated='right' color='red' size='tiny' icon='delete'/>
           </Item.Content>
+          <Button onClick={deleteEvent(event.id)} as='a' floated="right" color="red" size="tiny" icon="delete" />
+          <Button floated="right" color="blue" size="tiny" icon="edit" />
+                <EventInfo event={event}/>
         </Item>
-      </Item.Group>
+      </Card>
     );
   }
 }

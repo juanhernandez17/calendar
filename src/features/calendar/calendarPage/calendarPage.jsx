@@ -26,9 +26,9 @@ class CalendarPage extends Component {
         <Container className="main">
           <Grid>
             <Grid.Column width={3}>
-              <CreateEvent/>
-              <h1>Agenda</h1>
-              <CalendarAgenda/>
+              <CreateEvent props={this.props}/>
+              <h1>Your Events</h1>
+              <CalendarAgenda events={calendars} deleteEvent={this.handleDeleteEvent}/>
             </Grid.Column>
             <Grid.Column width={13}>
               <CalendarCom

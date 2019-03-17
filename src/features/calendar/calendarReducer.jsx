@@ -8,7 +8,25 @@ const eventos = [
       start: new Date(),
       end: new Date(moment().add(1, "days")),
       title: "Some title"
-    }
+  },
+  {
+    id: cuid(),
+    start: new Date(),
+    end: new Date(moment().add(1, "days")),
+    title: "Event uno"
+  },
+  {
+    id: cuid(),
+    start: new Date(),
+    end: new Date(moment().add(5, "days")),
+    title: "Event dos"
+  },
+  {
+    id: cuid(),
+    start: new Date(),
+    end: new Date(moment().add(3, "days")),
+    title: "Event tres"
+  }
 ];
 
 export const createEvent = (state, payload) => {

@@ -4,13 +4,17 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import moment from 'moment'
 
-export const DateInput = ({input: {value, onChange, ...restInput}, width, placeholder, meta: {touched, error}, ...rest}) => {
+const DateInput = ({input: {value, onChange, onBlur, ...restInput}, width, placeholder, meta: {touched, error}, ...rest}) => {
+  if (value) {
+    value = moment(value, 'X')
+  }
   return (
+
     <Form.Field error={touched && !!error} width={width}>
       <DatePicker
         {...rest}
         placeholderText={placeholder}
-        selected={value ? moment(value) : null}
+        selected={value ? new Date(moment(value).format('MM/DD/YYYY HH:mm')) : null}
         onChange={onChange}
         {...restInput}
       />
@@ -18,3 +22,5 @@ export const DateInput = ({input: {value, onChange, ...restInput}, width, placeh
     </Form.Field>
   )
 }
+
+export default DateInput
